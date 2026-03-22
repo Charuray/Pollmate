@@ -7,12 +7,12 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/
 
 // ─────────────────────────────────────────────────────────────────────────
 const firebaseConfig = {
-  apiKey: 'AIzaSyD-d-f6Uqv9Fxj2TAaGm0oJqF9nz0-GeXc',
-  authDomain: 'pollmate-662ed.firebaseapp.com',
-  projectId: 'pollmate-662ed',
-  storageBucket: 'pollmate-662ed.firebasestorage.app',
-  messagingSenderId: '1014682663951',
-  appId: '1:1014682663951:web:a6b61d43de451d2dccf77a',
+  apiKey:            import.meta.env.VITE_API_KEY,
+  authDomain:        import.meta.env.VITE_AUTH_DOMAIN,
+  projectId:         import.meta.env.VITE_PROJECT_ID,
+  storageBucket:     import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId:             import.meta.env.VITE_APP_ID,
 };
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0]
 export const db   = getFirestore(app)
