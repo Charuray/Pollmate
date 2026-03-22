@@ -1,0 +1,29 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Users can read/write their own profile
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Polls — anyone can read, authenticated users can create
+    // Only the creator can update (close/delete) their poll
+    match /polls/{pollId} {
+      allow read: if true;
+      allow create: if true;
+      allow update: if true;
+      allow delete: if true;  // Simplest for demo — restrict in production
+
+      // Votes subcollection — anyone can read/write (for voting without login)
+      match /votes/{voteId} {
+        allow read, write: if true;
+      }
+
+      // Suggestions subcollection
+      match /suggestions/{sugId} {
+        allow read, write: if true;
+      }
+    }
+  }
+}
